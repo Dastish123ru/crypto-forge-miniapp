@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import tonLogo from "./ton-logo.png";
 
 const App = () => {
   const [timer, setTimer] = useState(7200);
@@ -15,7 +15,7 @@ const App = () => {
   const formatTime = (s) => {
     const m = Math.floor(s / 60);
     const sec = s % 60;
-    return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+    return `${m}:${sec < 10 ? "0" : ""}${sec}`;
   };
 
   const handleFarm = () => {
@@ -26,20 +26,20 @@ const App = () => {
   };
 
   return (
-    <div className="forge-wrapper">
-      <div className="forge-header">
+    <div className="forge-ui">
+      <div className="header">
+        <img src={tonLogo} alt="TON logo" className="logo"/>
         <h1>CryptoForge</h1>
         <p>Твой баланс: {balance} Статеров</p>
       </div>
-      <div className="forge-core">
-        <div className="timer-display">
-          {timer > 0 ? `Жди: ${formatTime(timer)}` : 'Фармить 1 Статер'}
-        </div>
-        <button onClick={handleFarm} disabled={timer > 0} className="forge-button">
-          Фармить
-        </button>
+      <div className="timer">
+        {timer > 0 ? (
+          <h2>Жди: {formatTime(timer)}</h2>
+        ) : (
+          <button onClick={handleFarm}>Фармить 1 Статер</button>
+        )}
       </div>
-      <div className="forge-footer">@Crypt0Forge_bot</div>
+      <p className="bot-hint">@Crypt0Forge_bot</p>
     </div>
   );
 };
