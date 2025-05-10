@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import './App.css';
 
 const App = () => {
-  const [timer, setTimer] = useState(1800);
+  const [timer, setTimer] = useState(7200);
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
@@ -19,22 +20,26 @@ const App = () => {
 
   const handleFarm = () => {
     if (timer === 0) {
-      setBalance(balance + 2);
-      setTimer(1800);
+      setBalance(balance + 1);
+      setTimer(7200);
     }
   };
 
   return (
-    <div className="text-center p-4">
-      <h1 className="text-3xl font-bold mb-4">CryptoForge</h1>
-      <p className="mb-2">Твой баланс: {balance} Статеров</p>
-      <button
-        onClick={handleFarm}
-        disabled={timer > 0}
-        className="bg-yellow-500 text-black px-6 py-2 rounded-xl disabled:opacity-50 transition"
-      >
-        {timer > 0 ? `Жди: ${formatTime(timer)}` : 'Фармить 2 Статера'}
-      </button>
+    <div className="forge-wrapper">
+      <div className="forge-header">
+        <h1>CryptoForge</h1>
+        <p>Твой баланс: {balance} Статеров</p>
+      </div>
+      <div className="forge-core">
+        <div className="timer-display">
+          {timer > 0 ? `Жди: ${formatTime(timer)}` : 'Фармить 1 Статер'}
+        </div>
+        <button onClick={handleFarm} disabled={timer > 0} className="forge-button">
+          Фармить
+        </button>
+      </div>
+      <div className="forge-footer">@Crypt0Forge_bot</div>
     </div>
   );
 };

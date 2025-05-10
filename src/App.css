@@ -1,0 +1,57 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+  background-color: #0d0d0d;
+  color: #FFD700;
+}
+
+.forge-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.forge-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.forge-core {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-display {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.forge-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #FFA500;
+  color: black;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.forge-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.forge-footer {
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  color: #AAA;
+}
