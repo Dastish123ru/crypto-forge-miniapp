@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import tonLogo from "./ton-logo.png";
 
 const App = () => {
   const [timer, setTimer] = useState(7200);
@@ -26,20 +25,12 @@ const App = () => {
   };
 
   return (
-    <div className="forge-ui">
-      <div className="header">
-        <img src={tonLogo} alt="TON logo" className="logo"/>
-        <h1>CryptoForge</h1>
-        <p>Твой баланс: {balance} Статеров</p>
-      </div>
-      <div className="timer">
-        {timer > 0 ? (
-          <h2>Жди: {formatTime(timer)}</h2>
-        ) : (
-          <button onClick={handleFarm}>Фармить 1 Статер</button>
-        )}
-      </div>
-      <p className="bot-hint">@Crypt0Forge_bot</p>
+    <div className="app">
+      <h1>CryptoForge Кран</h1>
+      <p>Баланс: {balance} Статер</p>
+      <button onClick={handleFarm} disabled={timer > 0}>
+        {timer > 0 ? `Жди: ${formatTime(timer)}` : "Фармить 1 Статер"}
+      </button>
     </div>
   );
 };
