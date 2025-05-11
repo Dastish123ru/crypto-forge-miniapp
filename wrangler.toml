@@ -1,0 +1,7 @@
+name = "crypto-forge-miniapp"
+compatibility_date = "2025-05-11"
+type = "javascript"
+
+[[kv_namespaces]]
+binding = "USER_BALANCES"
+id = "56d60f0e98ae4a2e94acfb17da4fa674"
