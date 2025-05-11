@@ -1,7 +1,7 @@
-// src/index.js
+// functions/api.js
 
 /**
- * GET /?tg=<telegram_username>
+ * GET /api?tg=<telegram_username>
  * возвращает JSON: { balance: number, lastTs: number }
  */
 export async function onRequestGet({ request, env }) {
@@ -19,13 +19,13 @@ export async function onRequestGet({ request, env }) {
 }
 
 /**
- * POST /
+ * POST /api
  * Тело запроса: { tg: string, amount: number }
  * Сохраняет новые баланс и timestamp.
  */
 export async function onRequestPost({ request, env }) {
   const { tg, amount } = await request.json();
-  await env.USER_BALANCES.put(`bal:${tg}`, String(amount));
-  await env.USER_BALANCES.put(`ts:${tg}`,  String(Date.now()));
+  await env.USER_BALANCES.put(`bal:${tg}`,  String(amount));
+  await env.USER_BALANCES.put(`ts:${tg}`,   String(Date.now()));
   return new Response(null, { status: 204 });
 }
