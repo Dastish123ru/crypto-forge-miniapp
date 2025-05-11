@@ -1,23 +1,72 @@
+/* src/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+* { box-sizing: border-box; margin:0; padding:0; }
+html, body { height:100%; font-family:'Montserrat', sans-serif; }
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #111;
-  color: #f0c040;
+  background: url('/background.jpg') center/cover no-repeat fixed;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.app-container {
+  background: rgba(0,0,0,0.75);
+  border: 3px solid #DAA520;
+  border-radius: 16px;
+  padding: 24px;
+  width: 320px;
   text-align: center;
-  padding-top: 50px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.9);
 }
 
-button {
-  background-color: #f0c040;
+.logo {
+  width: 240px;
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.balance {
+  font-size: 1rem;
+  color: #FFD700;
+  margin-bottom: 12px;
+}
+
+.timer {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #FFD700;
+  margin-bottom: 16px;
+}
+
+.ton-icon {
+  width: 48px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+button.farm-btn {
+  background: linear-gradient(135deg, #DAA520, #FFD700);
   border: none;
-  color: #000;
   padding: 12px 24px;
-  font-size: 18px;
-  border-radius: 8px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
   cursor: pointer;
+  transition: transform .1s, opacity .2s;
 }
 
-button:disabled {
+button.farm-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+button.farm-btn:active {
+  transform: scale(0.95);
+}
+
+.footer {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: #AAA;
 }

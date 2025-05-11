@@ -1,38 +1,51 @@
-import { useState, useEffect } from "react";
+// src/App.jsx
+import { useState, useEffect } from 'react';
+import './style.css';
+import logoSrc from './assets/logo.png';
+import tonSrc from './assets/ton-logo.png';
 
-const App = () => {
-  const [timer, setTimer] = useState(7200);
+export default function App() {
+  const [timer, setTimer] = useState(120 * 60);
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer((prev) => (prev > 0 ? prev - 1 : 0));
+    const id = setInterval(() => {
+      setTimer((t) => (t > 0 ? t - 1 : 0));
     }, 1000);
-    return () => clearInterval(interval);
+    return () => clearInterval(id);
   }, []);
 
   const formatTime = (s) => {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${m}:${sec < 10 ? "0" : ""}${sec}`;
+    const m = String(Math.floor(s/60)).padStart(2,'0');
+    const sec = String(s%60).padStart(2,'0');
+    return `${m}:${sec}`;
   };
 
   const handleFarm = () => {
     if (timer === 0) {
-      setBalance(balance + 1);
-      setTimer(7200);
+      setBalance((b) => b + 1);
+      setTimer(120 * 60);
     }
   };
 
   return (
-    <div className="app">
-      <h1>CryptoForge Кран</h1>
-      <p>Баланс: {balance} Статер</p>
-      <button onClick={handleFarm} disabled={timer > 0}>
-        {timer > 0 ? `Жди: ${formatTime(timer)}` : "Фармить 1 Статер"}
+    <div className="app-container">
+      <img src={logoSrc} alt="CryptoForge" className="logo" />
+      <div className="balance">
+        Баланс: {balance} 
+        <img src={tonSrc} alt="TON" className="ton-icon" />
+      </div>
+      <div className="timer">
+        {timer > 0 ? `Жди: ${formatTime(timer)}` : 'Готов!'}
+      </div>
+      <button
+        className="farm-btn"
+        onClick={handleFarm}
+        disabled={timer > 0}
+      >
+        Фармить{timer === 0 && ' 1 Статер'}
       </button>
+      <div className="footer">@Crypt0Forge_bot</div>
     </div>
   );
-};
-
-export default App;
+}
