@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useState, useEffect, useRef } from 'react';
 import './style.css';
 import logoSrc from './assets/logo.png';
@@ -33,7 +32,7 @@ export default function App() {
         } else {
           updateTimer();
         }
-        // запустим интервал для каждую секунду обновлять таймер, но только если он >0
+        // запустим интервал для каждую секунду обновлять таймер
         intervalRef.current = setInterval(() => {
           updateTimer();
         }, 1000);
@@ -43,37 +42,27 @@ export default function App() {
     return () => clearInterval(intervalRef.current);
   }, []);
 
-   const handleFarm = () => {
-   if (timer === 0) {
--    setBalance((b) => b + 1);
--    const now = Date.now();
--    lastTsRef.current = now;
--    setTimer(FARM_INTERVAL);
--
--    fetch('/api', {
--      method: 'POST',
--      headers: { 'Content-Type': 'application/json' },
--      body: JSON.stringify({ tg: '@menbe1s', amount: balance + 1 }),
--    }).catch(console.error);
-+    // 1) Вычисляем новый баланс
-+    const newBalance = balance + 1;
-+
-+    // 2) Обновляем локальный стейт
-+    setBalance(newBalance);
-+
-+    // 3) Отмечаем время фарма и запускаем таймер
-+    const now = Date.now();
-+    lastTsRef.current = now;
-+    setTimer(FARM_INTERVAL);
-+
-+    // 4) Отправляем новый баланс на сервер
-+    fetch('/api', {
-+      method: 'POST',
-+      headers: { 'Content-Type': 'application/json' },
-+      body: JSON.stringify({ tg: '@menbe1s', amount: newBalance }),
-+    }).catch(console.error);
-   }
- };
+  const handleFarm = () => {
+    if (timer === 0) {
+      // 1) Рассчитываем обновлённый баланс
+      const newBalance = balance + 1;
+
+      // 2) Сразу выставляем его в локальном состоянии
+      setBalance(newBalance);
+
+      // 3) Отмечаем время фарма и перезапускаем таймер
+      const now = Date.now();
+      lastTsRef.current = now;
+      setTimer(FARM_INTERVAL);
+
+      // 4) Отправляем новый баланс на сервер
+      fetch('/api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tg: '@menbe1s', amount: newBalance }),
+      }).catch(console.error);
+    }
+  };
 
   // Формат mm:ss
   const formatTime = (s) => {
