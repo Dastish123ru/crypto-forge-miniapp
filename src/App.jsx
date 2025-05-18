@@ -7,13 +7,17 @@ import tonSrc from './assets/ton-logo.png';
 const FARM_INTERVAL = 120 * 60; // 120 минут
 
 // Наша «таблица»: верхние границы диапазонов и выплаты
+// src/App.jsx
+// …в начале файла, вместо прежнего prizes
 const prizes = [
-  { max: 5000,  amount: 2   },   // 1–5000 → 2
-  { max: 8000,  amount: 5   },   // 5001–8000 → 5
-  { max: 9500,  amount: 10  },   // 8001–9500 → 10
-  { max: 9900,  amount: 50  },   // 9501–9900 → 50
-  { max:10000, amount: 100 }    // 9901–10000 →100
+  { max: 9885,   amount:    1   },   // 00001–09885  (90%)
+  { max: 9985,   amount:   10   },   // 09886–09985  (8.889%)
+  { max: 9993,   amount:  100   },   // 09986–09993  (1%)
+  { max: 9997,   amount: 1000   },   // 09994–09997  (0.1%)
+  { max: 9999,   amount:10000   },   // 09998–09999  (0.01%)
+  { max:10000,   amount:100000  },   // 10000       (0.001%)
 ];
+
 
 export default function App() {
   const [timer, setTimer]     = useState(0);
