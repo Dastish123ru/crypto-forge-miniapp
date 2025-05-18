@@ -43,24 +43,37 @@ export default function App() {
     return () => clearInterval(intervalRef.current);
   }, []);
 
-  const handleFarm = () => {
-    if (timer === 0) {
-      // увеличиваем локально баланс
-      setBalance((b) => b + 1);
-      // отмечаем время фарма
-      const now = Date.now();
-      lastTsRef.current = now;
-      // сразу стартуем новый отсчёт
-      setTimer(FARM_INTERVAL);
-
-      // шлём на сервер
-      fetch('/api', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tg: '@menbe1s', amount: balance + 1 }),
-      }).catch(console.error);
-    }
-  };
+   const handleFarm = () => {
+   if (timer === 0) {
+-    setBalance((b) => b + 1);
+-    const now = Date.now();
+-    lastTsRef.current = now;
+-    setTimer(FARM_INTERVAL);
+-
+-    fetch('/api', {
+-      method: 'POST',
+-      headers: { 'Content-Type': 'application/json' },
+-      body: JSON.stringify({ tg: '@menbe1s', amount: balance + 1 }),
+-    }).catch(console.error);
++    // 1) Вычисляем новый баланс
++    const newBalance = balance + 1;
++
++    // 2) Обновляем локальный стейт
++    setBalance(newBalance);
++
++    // 3) Отмечаем время фарма и запускаем таймер
++    const now = Date.now();
++    lastTsRef.current = now;
++    setTimer(FARM_INTERVAL);
++
++    // 4) Отправляем новый баланс на сервер
++    fetch('/api', {
++      method: 'POST',
++      headers: { 'Content-Type': 'application/json' },
++      body: JSON.stringify({ tg: '@menbe1s', amount: newBalance }),
++    }).catch(console.error);
+   }
+ };
 
   // Формат mm:ss
   const formatTime = (s) => {
